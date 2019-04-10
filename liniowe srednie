@@ -41,7 +41,7 @@ namespace ConsoleApp1
             long looking_Value = 1001;
             long result;
 
-            Console.WriteLine("");
+            Console.WriteLine("wielkosc tablicy;looking_Value;result;czas;liczba operacji");
             for (int x = 2000000; x < (long)Math.Pow(2, 30); x += 100000)
             {
                 long[] tab = new long[x];
