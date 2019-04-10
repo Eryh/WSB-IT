@@ -1,0 +1,62 @@
+using System;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Linq;
+using System.Collections.Generic;
+using System.IO;
+/// <summary>
+/// Liniowe pesymistyczne
+/// </summary>
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        private static int counter;
+
+        public static int simple_search(int[] tab, int a)
+        {
+            for (int i = 0; i < tab.Length; i++)
+            {
+                if (tab[i] == a) return i;
+            }
+            return -1;
+        }
+
+        public static int simple_search_founder(int[] tab, int a)
+        {
+            counter = 0;
+            for (int i = 0; i < tab.Length; i++)
+            {
+                counter++;
+                if (tab[i] == a) return i;
+
+            }
+            return -1;
+        }
+
+        static void Main(string[] args)
+        {
+            Random rand = new Random();
+            int looking_Value = 1001;
+            int result;
+
+            Console.WriteLine("wielkosc tablicy;looking_Value;result;czas;liczba operacji");
+            for (int k = 2000000; k < (int)Math.Pow(2, 30); k += 100000)
+            {
+                int[] tab = new int[k];
+                for (int i = 0; i < tab.Length; i++)
+                {
+                    tab[i] = rand.Next(1, 1000);
+                }
+
+                long start = Stopwatch.GetTimestamp();
+                result = simple_search(tab, looking_Value);
+                long stop = Stopwatch.GetTimestamp();
+                result = simple_search_founder(tab, looking_Value);
+                Console.WriteLine(k + ";" + looking_Value + ";" + result + ";" + (stop - start) + ";" + counter);
+            }
+
+        }
+    }
+}
