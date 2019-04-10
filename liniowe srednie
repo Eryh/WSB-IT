@@ -1,0 +1,67 @@
+using System;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Linq;
+using System.Collections.Generic;
+using System.IO;
+/// <summary>
+/// liniowe srednie
+/// </summary>
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        private static int counter;
+
+        public static long simple_search(long[] tab, long a)
+        {
+            for (long i = 0; i < tab.Length; i++)
+            {
+                if (tab[i] == a) return i;
+            }
+            return -1;
+        }
+
+        public static long simple_search_founder(long[] tab, long a)
+        {
+            counter = 0;
+            for (long i = 0; i < tab.Length; i++)
+            {
+                counter++;
+                if (tab[i] == a) return i;
+
+            }
+            return -1;
+        }
+
+        static void Main(string[] args)
+        {
+            Random rand = new Random();
+            long looking_Value = 1001;
+            long result;
+
+            Console.WriteLine("");
+            for (int x = 2000000; x < (long)Math.Pow(2, 30); x += 100000)
+            {
+                long[] tab = new long[x];
+                for (int i = 0; i < tab.Length; i++)
+                {
+                    long bla = (long)Math.Pow(2, 30);
+                    tab[i] = (long)((rand.NextDouble() * 2.0 - 1.0) * long.MaxValue);
+                    if (i == tab.Length / 2)
+                    {
+                        looking_Value = tab[i];
+                    }
+                }
+
+                long start = Stopwatch.GetTimestamp();
+                result = simple_search(tab, looking_Value);
+                long stop = Stopwatch.GetTimestamp();
+                result = simple_search_founder(tab, looking_Value);
+                Console.WriteLine( x + ";" + looking_Value + ";" + result + ";" + (stop - start) + ";" + counter );
+            }
+
+        }
+    }
+}
