@@ -39,7 +39,7 @@ namespace ConsoleApp1
             int lookUpValue = 1001;
             int result;
         
-            Console.WriteLine("size;lookUpValue;result;time;oper_count");
+            Console.WriteLine("wielkosc tablicy;looking_Value;result;czas;liczba operacji");
             for(int k = 2000000;k < (int)Math.Pow(2,28);k += 100000)
             {   int[] tab = new int[k];
                 for (int i = 0; i < tab.Length; i++)
