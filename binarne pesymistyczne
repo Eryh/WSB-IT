@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+/// <summary>
+/// binarne pesymistyczne
+/// </summary>
+namespace ConsoleApp1
+{
+    class Program
+    {
+        private static int counter;
+        static bool Is_Present(long[] Vector, long Number)
+        {
+            int Left = 0, Right = Vector.Length - 1, Middle;
+            while (Left <= Right)
+            {
+                Middle = (Left + Right) / 2;
+                if (Vector[Middle] == Number) return true;
+                else if (Vector[Middle] > Number) Right = Middle - 1;
+                else Left = Middle + 1;
+            }
+            return false;
+        }
+
+        static bool Is_Present_Counter(long[] Vector, long Number)
+        {
+            int Left = 0, Right = Vector.Length - 1, Middle;
+            while (Left <= Right)
+            {
+                Middle = (Left + Right) / 2;
+                counter++;
+                if (Vector[Middle] == Number) return true;
+                else if (Vector[Middle] > Number) Right = Middle - 1;
+                else Left = Middle + 1;
+            }
+            return false;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("wielkosc tablicy;looking_Value;result;czas;liczba operacji");
+            int looking_Value = 0;
+            for (int i = 2000000; i < (long)Math.Pow(2, 30); i += 100000)
+            {
+
+
+                long[] tab = new long[i];
+                for (int j = 0; j < tab.Length; j++)
+                {
+                    tab[j] = j + 1;
+                }
+                counter = 0;
+
+                long start = Stopwatch.GetTimestamp();
+                var result = Is_Present(tab, looking_Value);
+                long stop = Stopwatch.GetTimestamp();
+                result = Is_Present_Counter(tab, looking_Value);
+                Console.WriteLine(i + ";" + looking_Value + ";" + result + ";" + (stop - start) + ";" + counter);
+            }
+        }
+    }
+}
