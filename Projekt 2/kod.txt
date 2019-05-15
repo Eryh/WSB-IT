@@ -1,0 +1,122 @@
+using System;
+using System.Numerics;
+using System.Diagnostics;
+namespace Liczbypierwsze
+{
+    class Program
+    {
+        static bool wynik;
+        static long kroki = 0;
+
+        //PRZYKLADOWE
+
+        public static bool Przykladowy(BigInteger Num)
+        {
+            if (Num < 2) return false;
+            else if (Num < 4) return true;
+            else if (Num % 2 == 0) return false;
+            else for (BigInteger u = 3; u < Num / 2; u += 2)
+                {
+                    if (Num % u == 0) return false;
+                }
+            return true;
+        }
+
+        public static bool PrzykladowyZLiczeniem(BigInteger Num)
+        {
+            if (Num < 2) return false;
+            else if (Num < 4) return true;
+            else if (Num % 2 == 0) return false;
+            else for (BigInteger u = 3; u < Num / 2; u += 2)
+                {
+                    if (Num % u == 0) return false;
+                    kroki++;
+                }
+            return true;
+        }
+                     
+        //POPRAWIONE
+
+        public static bool Poprawiony(long number)
+        {
+            if (number <= 1) return false;
+            if (number == 2) return true;
+            if (number % 2 == 0) return false;
+
+            int pierwiastek = (int)Math.Floor(Math.Sqrt(number));
+
+            for (int i = 3; i <= pierwiastek; i += 2)
+            {
+                if (number % i == 0) return false;
+            }
+            return true;
+        }
+
+        public static bool PoprawionZLiczeniem(long number)
+        {
+            if (number <= 1) return false;
+            if (number == 2) return true;
+            if (number % 2 == 0) return false;
+
+            int pierwiastek = (int)Math.Floor(Math.Sqrt(number));
+
+            for (int i = 3; i <= pierwiastek; i += 2)
+            {
+                if (number % i == 0)
+                    return false;
+                kroki++;
+            }
+            return true;
+        }
+
+        //SREDNIA
+
+        public static long Srednia(long[] arr, long size)
+        {
+            long sum = 0;
+            long average = 0;
+            for (int i = 0; i < size; i++)
+            {
+                sum += arr[i];
+            }
+            average = sum / size;
+            return average;
+        }
+
+        //GLOWNA FUNKCJA
+
+        public static void FunkcjaDoWynikow(long n)
+        {
+            kroki = 0;
+            long IloscPowtorzen = 1;
+            long[] TablicaDoSredniej = new long[IloscPowtorzen];
+            Stopwatch sw = new Stopwatch();
+            for (int k = 0; k < IloscPowtorzen; k++)
+            {
+
+                //sw.Start();
+                long start = Stopwatch.Frequency;
+                wynik = Poprawiony(n);
+                //sw.Stop();
+                TablicaDoSredniej[k] = sw.ElapsedMilliseconds;
+                //sw.Reset();
+            }
+            wynik = PoprawionZLiczeniem(n);
+            Console.WriteLine(Srednia(TablicaDoSredniej, IloscPowtorzen) + "," + n + "," + wynik + "," + kroki);
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Sredni czas;Sprawdzana liczba;Wynik;Liczba krokow");
+            FunkcjaDoWynikow(100913);
+            FunkcjaDoWynikow(1009139);
+            FunkcjaDoWynikow(10091401);
+            FunkcjaDoWynikow(100914061);
+            FunkcjaDoWynikow(1009140611);
+            FunkcjaDoWynikow(10091406133);
+            FunkcjaDoWynikow(100914061337);
+            FunkcjaDoWynikow(1009140613399);
+        }
+
+    }
+}
