@@ -1,0 +1,169 @@
+Kod źródłowy:
+  const int NIter = 10;
+            Console.WriteLine("n\tt[s]");
+            for (int i = 50000; i <= 200000; i += 8000)
+            {
+                int[] tablica = new int[i];
+                Random(tablica);
+                double ElapsedSeconds;
+                long ElapsedTime = 0, MinTime = long.MaxValue, MaxTime = long.MinValue, IterationElapsedTime;
+                for (int n = 0; n < (NIter + 1 + 1); ++n)
+                {
+                    long StartingTime = Stopwatch.GetTimestamp();
+                    CocktailSort(tablica);
+                    long EndingTime = Stopwatch.GetTimestamp();
+                    IterationElapsedTime = EndingTime - StartingTime;
+                    ElapsedTime += IterationElapsedTime;
+
+                    if (IterationElapsedTime < MinTime) MinTime = IterationElapsedTime;
+                    if (IterationElapsedTime > MaxTime) MaxTime = IterationElapsedTime;
+                }
+                ElapsedTime -= (MinTime + MaxTime);
+                ElapsedSeconds = ElapsedTime * (1.0 / (NIter * Stopwatch.Frequency));
+                Console.WriteLine("{0}\t{1}", i, ElapsedSeconds.ToString("F4"));
+
+
+
+private static void Random(int[] tablica)
+        {
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
+            for (int i = 0; i < tablica.Length; i++)
+            {
+                tablica[i] = rnd.Next(int.MaxValue);
+            }
+
+private static void CocktailSort(int[] t)
+        {
+            int Left = 1, Right = t.Length - 1, k = t.Length - 1;
+            do
+            {
+                for (int j = Right; j >= Left; j--)
+                    if (t[j - 1] > t[j])
+                    {
+                        int Buf = t[j - 1]; t[j - 1] = t[j]; t[j] = Buf;
+                        k = j;
+                    }
+                Left = k + 1;
+                for (int j = Left; j <= Right; j++)
+                    if (t[j - 1] > t[j])
+                    {
+                        int Buf = t[j - 1]; t[j - 1] = t[j]; t[j] = Buf;
+                        k = j;
+                    }
+                Right = k - 1;
+            }
+            while (Left <= Right);
+
+
+
+  private static void Heapify(int[] t, uint left, uint right)
+        {
+            uint i = left,
+            j = 2 * i + 1;
+            int buf = t[i];
+            while (j <= right)
+            {
+                if (j < right)
+                    if (t[j] < t[j + 1]) j++;
+                if (buf >= t[j]) break;
+                t[i] = t[j];
+                i = j;
+                j = 2 * i + 1;
+            }
+            t[i] = buf;
+        }
+        private static void HeapSort(int[] t)
+        {
+            uint left = ((uint)t.Length / 2),
+            right = (uint)t.Length - 1;
+            while (left > 0)
+            {
+                left--;
+                Heapify(t, left, right);
+            }
+            while (right > 0)
+            {
+                int buf = t[left];
+                t[left] = t[right];
+                t[right] = buf;
+                right--;
+                Heapify(t, left, right);
+            }
+
+        }
+    }
+}
+    private static void InsertionSort(int[] t)
+        {
+            for (uint i = 1; i < t.Length; i++)
+            {
+                uint j = i;
+                int Buf = t[j];
+                while ((j > 0) && (t[j - 1] > Buf))
+                {
+                    t[j] = t[j - 1];
+                    j--;
+                }
+                t[j] = Buf;
+private static void SelectionSort(int[] t)
+        {
+            uint k;
+            for (uint i = 0; i < (t.Length - 1); i++)
+            {
+                int Buf = t[i];
+                k = i;
+                for (uint j = i + 1; j < t.Length; j++)
+                    if (t[j] < Buf)
+                    {
+                        k = j;
+                        Buf = t[j];
+                    }
+                t[k] = t[i];
+                t[i] = Buf;
+            }
+
+
+private static void Growing(int[] tablica)
+        {
+            for (int i = 0; i < tablica.Length; i++)
+            { tablica[i] = i; }
+        }
+private static void Descending(int[] tablica)
+        {
+            int x = tablica.Length;
+            for (int i = 0; i < tablica.Length; i++)
+            {
+                tablica[i] = x;
+                x--;
+private static void Constantly(int[] tablica)
+        {
+            for (int i = 0; i < tablica.Length; i++)
+            { tablica[i] = 10; }
+        }
+
+    private static void VShaped(int[] tablica)
+        {
+            int y = tablica.Length;
+            int z = 1;
+            for (int i = 0; i <= (tablica.Length / 2) - 1; i++)
+            {
+                tablica[i] = y;
+                y -= 2;
+            }
+            for (int i = tablica.Length / 2; i < tablica.Length; i++)
+            {
+                tablica[i] = z;
+                z += 2;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
