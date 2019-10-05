@@ -1,0 +1,160 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class osoba
+    {
+        public string Imię
+        {
+            get;
+            private set;
+        }
+        public string Nazwisko
+        {
+            get;
+            private set;
+        }
+
+        public adres AdresZamieszkania
+        {
+            get;
+            private set;
+        }
+        public string PrzedstawSię()
+        {
+            return "Nazywam Się " + this.Imię + ' ' + this.Nazwisko + '\n' +this.AdresZamieszkania.AdresWFormaciePocztowym + '\n' ;
+        }
+        public void UstawDane(string noweImię, string noweNazwisko,string nowaUlica, string nowyNumerdomu, string nowyNumerMieszkania,string nowyKodPocztowy,string noweMiasto, string nowePaństwo)
+            {
+            this.Imię = noweImię;
+            this.Nazwisko = noweNazwisko;
+            AdresZamieszkania = new adres();
+            AdresZamieszkania.UstawDane(nowaUlica, nowyNumerdomu, nowyNumerMieszkania, nowyKodPocztowy, noweMiasto, nowePaństwo);
+            }
+
+
+    }
+}
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class adres
+    {
+        public string Ulica
+        {
+            get;
+            private set;
+        }
+
+        public string NumerDomu
+        {
+            get;
+            private set;
+        }
+
+        public string NumerMieszkania
+        {
+            get;
+            private set;
+        }
+
+        public string KodPocztowy
+        {
+            get;
+            private set;
+        }
+
+        public string Miasto
+        {
+            get;
+            private set;
+        }
+
+        public string Państwo
+        {
+            get;
+            private set;
+        }
+
+        public string AdresWFormaciePocztowym
+        {
+            get {
+                return "Ul. " + this.Ulica + ' ' + this.NumerDomu + '/' + this.NumerMieszkania + '\n' + this.KodPocztowy + ' ' + this.Miasto + '\n' + this.Państwo + ' ';
+                }
+        }
+        public void UstawDane(string nowaUlica, string nowyNumerDomu, string nowyNumerMieszkania, string nowyKodPocztowy, string noweMiasto, string nowePaństwo)
+        {
+            this.Ulica = nowaUlica;
+            this.NumerDomu = nowyNumerDomu;
+            this.NumerMieszkania = nowyNumerMieszkania;
+            this.KodPocztowy = nowyKodPocztowy;
+            this.Miasto = noweMiasto;
+            this.Państwo = nowePaństwo;
+        }
+    }
+}
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            // osoba zmienna = new osoba();
+            //  zmienna.UstawDane("Imię", "Nazwisko","Adres","Nr Domu","Numer Mieszkania","Kod Pocztowy", "Miasto", "Kraj");
+            //    Console.WriteLine(zmienna.PrzedstawSię());
+            //    Console.ReadKey();
+            Console.WriteLine("Witaj W Bazie Książka Adresowa ");
+
+
+        
+     for (int a=0;uint<tab.Length;uint+)
+            {
+                Console.WriteLine("1. Podaj Imię,Nazwisko,Nazwę Ulicy,Nr domu,Nr mieszkania,Kod Pocztowy,Miasto,Kraj");
+                Console.WriteLine("imię: ");
+                a = Console.Read();
+                Console.WriteLine("Podaj 2 liczbe: ");
+                b = Console.Read();
+                c = a + b;
+                Console.WriteLine("Wynik to: {1} ", c);
+                break;
+
+
+
+
+                
+                
+
+
+
+
+
+            }
+        }
+    }
+}
